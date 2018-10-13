@@ -70,12 +70,7 @@ def model_predict(img_path, model):
 
     return preds
 
-@app.route('/', methods=['GET'])
-def index():
-    # Main page
-    return render_template('index.html')
-
-@app.route('/predict', methods=['GET', 'POST'])
+@app.route('/', methods=['POST'])
 def upload():
     if request.method == 'POST':
         # Get the file from post request
@@ -99,7 +94,6 @@ def upload():
             'normal': round(prediction[0][2], 3)
         });
     return None
-
 
 if __name__ == '__main__':
     app.run(port=5000, debug=True)
