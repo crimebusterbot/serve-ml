@@ -7,7 +7,7 @@
         "WORKDIR /usr/src/app",
         "COPY ./src /usr/src/app/",
 
-        "RUN apt-get install python3-dev",
+        "RUN apk add python3-dev",
 
         "RUN pip install -r requirements.txt",
 
