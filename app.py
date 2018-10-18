@@ -70,6 +70,10 @@ def model_predict(img_path, model):
 
     return preds
 
+@app.route('/test', methods=['GET'])
+def test():
+    return "TEST"
+
 @app.route('/', methods=['POST'])
 def upload():
     if request.method == 'POST':
@@ -80,13 +84,16 @@ def upload():
         basepath = os.path.dirname(__file__)
         file_path = os.path.join(
            'uploads', secure_filename(f.filename))
+
+        # Using Flask to save image
         f.save(file_path)
 
         # Make prediction
         preds = model_predict(file_path, model)
         prediction = preds.tolist()
 
-        os.remove(file_path)
+        if os.path.exists(file_path):
+            os.remove(file_path)
 
         return json.dumps({
             'fake': round(prediction[0][0], 3),
@@ -96,4 +103,4 @@ def upload():
     return None
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
