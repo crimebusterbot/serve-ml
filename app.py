@@ -23,7 +23,7 @@ from gevent.pywsgi import WSGIServer
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH = 'models/22juni-weights.44-0.91.h5'
+MODEL_PATH = 'models/18nov-weights.66-0.91.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH)
@@ -99,7 +99,7 @@ def upload():
             'fake': round(prediction[0][0], 3),
             'good': round(prediction[0][1], 3),
             'normal': round(prediction[0][2], 3)
-        });
+        })
     return None
 
 if __name__ == '__main__':
