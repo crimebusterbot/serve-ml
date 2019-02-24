@@ -40,6 +40,3 @@ $ python app.py
 ```
 
 You should get a link to the localhost where the app is running.
-
-Gunicorn is used in the deployed version on [Heroku](https://webshop-checker-api.herokuapp.com/).
-
