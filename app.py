@@ -23,7 +23,7 @@ from gevent.pywsgi import WSGIServer
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH = 'models/18nov-weights.66-0.91.h5'
+MODEL_PATH = 'models/3mar-weights.66-0.99.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH)
@@ -31,29 +31,29 @@ model._make_predict_function()
 print('Model loaded. Start serving...')
 
 def resize_with_pad(image, width, height):
-    def get_padding_size(image):
-        h, w, _ = image.shape
-        longest_edge = max(h, w)
-        top, bottom, left, right = (0, 0, 0, 0)
-        if h < longest_edge:
-            dh = longest_edge - h
-            top = dh // 2
-            bottom = dh - top
-        elif w < longest_edge:
-            dw = longest_edge - w
-            left = dw // 2
-            right = dw - left
-        else:
-            pass
-        return top, bottom, left, right
+    # initialize the dimensions of the image to be resized and
+    # grab the image size
+    dim = None
+    (h, w) = image.shape[:2]
 
-    top, bottom, left, right = get_padding_size(image)
-    BLACK = [0, 0, 0]
-    constant = cv2.copyMakeBorder(image, top, bottom, left, right, cv2.BORDER_CONSTANT, value=BLACK)
+    # first we resize the whole image to the desired width using the right ratio
+    r = width / float(w)
+    dim = (width, int(h * r))
 
-    resized_image = cv2.resize(constant, (width, height))
+    # resize the image
+    resized = cv2.resize(image, dim, interpolation = cv2.INTER_AREA)
 
-    return resized_image
+    # the resized image heigth and width
+    (h, w) = resized.shape[:2]
+
+    # short images need to match the desired heigth
+    if h < height:
+        BLACK = [0, 0, 0]
+        resized = cv2.copyMakeBorder(resized, 0 , height - h, 0, 0, cv2.BORDER_CONSTANT, value=BLACK)
+    else: 
+        resized = resized[0:0+height, 0:0+width]
+
+    return resized
 
 def model_predict(img_path, model):
     img = cv2.imread(img_path)
@@ -92,15 +92,18 @@ def upload():
         preds = model_predict(file_path, model)
         prediction = preds.tolist()
 
+        # Remove the image from the temp uploads folder
         if os.path.exists(file_path):
             os.remove(file_path)
 
         return json.dumps({
             'fake': round(prediction[0][0], 3),
-            'good': round(prediction[0][1], 3),
-            'normal': round(prediction[0][2], 3)
+            'normal': round(prediction[0][1], 3),
+            'good': round(prediction[0][2], 3),
         })
     return None
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
+    # To run local:
+    # app.run(port=8080)

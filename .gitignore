@@ -2,3 +2,6 @@
 /bin
 /share
 /local
+/training/dataset
+/training/dataset_ori
+/training/logs
