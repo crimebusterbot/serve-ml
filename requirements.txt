@@ -36,7 +36,7 @@ opencv-python==3.2.0.8
 pbr==4.0.4
 protobuf==3.6.0
 python-dateutil==2.8.0
-pyyaml==3.12
+pyyaml==5.1b5
 s3transfer==0.2.0
 scipy==1.1.0
 six==1.11.0

@@ -29,7 +29,7 @@ numpy
 opencv-python
 pbr
 protobuf
-PyYAML
+pyyaml>=4.2b1
 python-dateutil
 s3transfer
 scipy
