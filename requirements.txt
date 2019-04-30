@@ -23,7 +23,7 @@ gunicorn==19.9.0
 h5py==2.8.0
 html5lib==0.9999999
 itsdangerous==0.24
-jinja2==2.10
+jinja2==2.10.1
 jmespath==0.9.4
 keras-applications==1.0.6
 keras-preprocessing==1.0.5
@@ -43,6 +43,6 @@ six==1.11.0
 tensorboard==1.8.0
 tensorflow==1.8.0
 termcolor==1.1.0
-urllib3==1.24.1           # via botocore
+urllib3==1.24.2
 werkzeug==0.14.1
 wheel==0.33.1             # via tensorboard, tensorflow

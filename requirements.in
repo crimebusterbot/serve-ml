@@ -17,7 +17,7 @@ grpcio
 h5py
 html5lib
 itsdangerous
-Jinja2
+Jinja2>=2.10.1
 jmespath
 Keras
 Keras-Applications
@@ -37,4 +37,5 @@ six
 tensorboard
 tensorflow
 termcolor
+urllib3>=1.24.2
 Werkzeug
