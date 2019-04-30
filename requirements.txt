@@ -4,7 +4,7 @@
 #
 #    pip-compile requirements.in
 #
-absl-py==0.2.2
+absl-py==0.7.1
 astor==0.6.2
 backports.weakref==1.0.post1
 bleach==1.5.0
@@ -34,14 +34,15 @@ mock==2.0.0
 numpy==1.14.5
 opencv-python==3.2.0.8
 pbr==4.0.4
-protobuf==3.6.0
+protobuf==3.7.1
 python-dateutil==2.8.0
 pyyaml==5.1b5
 s3transfer==0.2.0
 scipy==1.1.0
 six==1.11.0
-tensorboard==1.8.0
-tensorflow==1.8.0
+tensorboard==1.13.1
+tensorflow-estimator==1.13.0  # via tensorflow
+tensorflow==1.13.1
 termcolor==1.1.0
 urllib3==1.24.2
 werkzeug==0.14.1

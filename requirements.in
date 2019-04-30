@@ -35,7 +35,7 @@ s3transfer
 scipy
 six
 tensorboard
-tensorflow
+tensorflow>=1.12.1
 termcolor
 urllib3>=1.24.2
 Werkzeug
