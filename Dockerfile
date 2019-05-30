@@ -7,8 +7,8 @@ COPY requirements.txt /usr/src/app
 # since often it does not install the latest version by default
 # Use `--force-reinstall` and `--no-cache-dir` flags to make sure,
 # that the latest stable releases of the dependencies are alwayse installed
-RUN pip3 install pip --upgrade /
-    && pip3 install -r requirements.txt --force-reinstall --no-cache-dir
+RUN pip3 install pip --upgrade
+RUN pip3 install -r requirements.txt --force-reinstall --no-cache-dir
 
 COPY . /usr/src/app
 EXPOSE 80
